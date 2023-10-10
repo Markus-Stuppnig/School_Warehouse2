@@ -1,6 +1,7 @@
 package at.ac.tgm.mstuppnig.warehouse2.warehouse;
 
 import at.ac.tgm.mstuppnig.warehouse2.Warehouse2Application;
+import at.ac.tgm.mstuppnig.warehouse2.io.LocalListener;
 import at.ac.tgm.mstuppnig.warehouse2.model.WarehouseData;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -11,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.http.MediaType;
+
+import java.util.ArrayList;
 
 @RestController
 public class WarehouseController {
@@ -43,6 +46,17 @@ public class WarehouseController {
 
         Warehouse2Application.sender.sendMessageToTopic(jsonString);
         return data;
+    }
+
+    @CrossOrigin(origins = "http://localhost:3000")
+    @RequestMapping(value="/warehouse/main", produces = MediaType.APPLICATION_JSON_VALUE)
+    public String warehouseMainData() {
+
+        if(Warehouse2Application.main) {
+            return LocalListener.data.toString();
+        }
+        System.out.println("3");
+        return null;
     }
 
     @CrossOrigin(origins = "http://localhost:3000")

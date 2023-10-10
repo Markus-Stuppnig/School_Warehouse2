@@ -3,7 +3,6 @@ package at.ac.tgm.mstuppnig.warehouse2.io;
 import jakarta.jms.*;
 import org.apache.activemq.ActiveMQConnection;
 import org.apache.activemq.ActiveMQConnectionFactory;
-import org.apache.catalina.Loader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
