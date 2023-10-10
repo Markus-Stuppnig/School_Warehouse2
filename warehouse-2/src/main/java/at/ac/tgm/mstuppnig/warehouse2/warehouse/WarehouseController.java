@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.http.MediaType;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 @RestController
@@ -53,9 +54,9 @@ public class WarehouseController {
     public String warehouseMainData() {
 
         if(Warehouse2Application.main) {
+            Warehouse2Application.sender.sendMessageToTopic("Main: " + LocalDateTime.now().toString());
             return LocalListener.data.toString();
         }
-        System.out.println("3");
         return null;
     }
 

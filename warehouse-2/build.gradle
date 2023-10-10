@@ -26,7 +26,8 @@ bootRun {
 //	if (project.hasProperty('args')) {
 //		args project.args.split(',')
 //	}
-	args = ["war1", "8081"]
+	args = ["main", "8080"]
+//	args = ["war1", "8081"]
 }
 
 tasks.named('test') {

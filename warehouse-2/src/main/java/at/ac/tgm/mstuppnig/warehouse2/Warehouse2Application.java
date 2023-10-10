@@ -22,11 +22,14 @@ public class Warehouse2Application {
 
 		String topic = args[0];
 
-		sender = new Sender(topic);
-
 		if(topic.equals("main")) {
 			main = true;
-			receiver = new Receiver("war1");
+
+			receiver = new Receiver("war1", true);
+			sender = new Sender("war1");
+		}else {
+			receiver = new Receiver(topic, false);
+			sender = new Sender(topic);
 		}
 	}
 }

@@ -20,7 +20,7 @@ public class Receiver {
 
     private final String topic;
 
-    public Receiver(String topic) {
+    public Receiver(String topic, boolean isMain) {
 
         this.topic = topic;
 
@@ -39,7 +39,7 @@ public class Receiver {
             destination = session.createTopic( this.topic );
 
             consumer = session.createConsumer(destination);
-            consumer.setMessageListener(new LocalListener());
+            consumer.setMessageListener(new LocalListener(isMain));
 
         } catch (Exception e) {
             e.printStackTrace();

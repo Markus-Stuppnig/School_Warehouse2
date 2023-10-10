@@ -14,14 +14,23 @@ public class LocalListener implements MessageListener {
 
     Logger logger = LoggerFactory.getLogger(Receiver.class);
 
+    private final boolean isMain;
+
+    public LocalListener(boolean isMain) {
+        this.isMain = isMain;
+    }
+
     @Override
     public void onMessage(Message message) {
         try {
-//            System.out.println("Received " + ((TextMessage) message).getText());
             String text = ((TextMessage) message).getText();
-            logger.info("Received " + text);
-            data.add(text);
-            ((TextMessage) message).acknowledge();
+            if(this.isMain && !text.startsWith("Main:")) {
+                logger.info("Received " + text);
+                data.add(text);
+            }else if(!this.isMain && text.startsWith("Main:")) {
+                logger.info("Time From " + text);
+            }
+//            ((TextMessage) message).acknowledge();
         } catch (Exception e) {
             e.printStackTrace();
         }
